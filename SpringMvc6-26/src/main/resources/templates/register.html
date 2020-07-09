@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Taco Cloud</title>
+  </head>
+  
+  <body>
+    <h1>regesiter</h1>
+
+    
+<!--    <p>New here? Click -->
+<!--       <a th:href="@{/register}">here</a> to register.</p>-->
+    
+    <!-- tag::thAction[] -->
+    <!--action指定controller中对应的方法路径即可!-->
+<!--    <form method="POST"  th:action="@{/user/login}">-->
+<!--      &lt;!&ndash;    th:action="@{../user/login}" >&ndash;&gt;-->
+<!--      <label for="username">用户名:<input type="text" id="username" name="username" /></label>-->
+<!--      <label for="password">密码:<input type="text" id="password" name="password" /></label>-->
+<!--      <input type="submit" value="登陆">-->
+<!--    </form>-->
+    <form method="POST" th:action="@{/user/register}" id="loginForm">
+    <!-- end::thAction[] -->
+      <label for="username">Username: </label>
+      <input type="text" name="username" id="username"  />
+      <span th:text="${usernameError}==null?' ':${usernameError}">NAME</span><br/>
+      
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password" /><br/>
+
+<!--      <label>-->
+<!--        <select th:id="type" th:name="temp">-->
+<!--          <option value ="volvo">Volvo</option>-->
+<!--          <option value ="saab">Saab</option>-->
+<!--          <option value="opel">Opel</option>-->
+<!--          <option value="audi">Audi</option>-->
+<!--        </select>-->
+<!--      </label>-->
+
+
+<!--      <input type="text" name="address.province" id="address.province" /><br/>-->
+      <label for="address.province"> Address.province:</label>
+        <select autofocus="true" name="address.province" id="address.province" >
+          <option value="">--Please choose an option--</option>
+          <option value ="volvo">Volvo</option>
+          <option value ="saab">Saab</option>
+          <option value="opel">Opel</option>
+         <option value="audi">Audi</option>
+        </select>
+      <br/>
+
+      <label for="addresscity">Address.city </label>
+      <input type="text" name="address.city" id="addresscity" /><br/>
+
+      <input type="submit" value="Register"/>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Good Thymes Virtual Grocery
+
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+    <script th:src="@{/abc.js}"></script>
+    <script th:src="@{/js/def.js}"></script>
+
+</head>
+
+<body>
+<h1>welcome!</h1>
+<h2>hello , <span th:text="${session.user}==null?'View':${session.user.username}">NAME</span>?</h2>
+
+
+<input type="submit" value="在线支付" onclick="display('lb')">
+<div id="lb" style="display:none">
+    <div >div属性：style ="display:none" 默认隐藏div</div>
+    <div th:text=" user&#45;&#45;  +${session.user}" >div属性：style ="display:none" 默认隐藏div</div>
+<!--    -->
+</div>
+<p>login：</p>
+<a th:text="next" th:href="@{/user/login}"> for login </a>
+
+<p>content：</p>
+<!--<a th:text=studyContent th:href="@{/study/content}"> study </a>-->
+<form  th:action="@{/study/content}" id="loginForm">
+    <label for="collectionName"> 选择类别:</label>
+    <select autofocus="true" name="studyType" id="collectionName" >
+<!--        <option value="">&#45;&#45;Please choose an option&#45;&#45;</option>-->
+        <option value ="java">java</option>
+        <option value ="c-cpp">c-cpp</option>
+    </select>
+    <br/>
+    <input type="submit" value="getContens"/>
+</form>
+
+
+
+
+</body>
+
+
+
+
+<script type="text/javascript">
+
+    function display(id){
+        var traget=document.getElementById(id);
+        if(traget.style.display=="none"){
+            traget.style.display="";
+        }else{
+            traget.style.display="none";
+        }
+    }
+</script>
+</html>

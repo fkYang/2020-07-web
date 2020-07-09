@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Taco Cloud</title>
+  </head>
+  
+  <body>
+    <h1>Login</h1>
+    <p>New here? Click
+      <a th:href="@{/user/register}">here</a> to register.</p>
+    
+<!--    <p>New here? Click -->
+<!--       <a th:href="@{/register}">here</a> to register.</p>-->
+    
+    <!-- tag::thAction[] -->
+    <!--action指定controller中对应的方法路径即可!-->
+<!--    <form method="POST"  th:action="@{/user/login}">-->
+<!--      &lt;!&ndash;    th:action="@{../user/login}" >&ndash;&gt;-->
+<!--      <label for="username">用户名:<input type="text" id="username" name="username" /></label>-->
+<!--      <label for="password">密码:<input type="text" id="password" name="password" /></label>-->
+<!--      <input type="submit" value="登陆">-->
+<!--    </form>-->
+    <form method="POST" th:action="@{/user/login}" id="loginForm">
+    <!-- end::thAction[] -->
+      <label for="username">Username: </label>
+      <input type="text" name="username" id="username"  /><br/>
+
+      
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password" /><br/>
+      <span th:text="${loginError}==null?'View':${loginError}">NAME</span><br/>
+      <input type="submit" value="Login"/>
+    </form>
+  </body>
+</html>
