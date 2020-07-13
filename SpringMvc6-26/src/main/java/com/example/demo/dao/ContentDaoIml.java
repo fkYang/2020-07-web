@@ -33,12 +33,8 @@ public class ContentDaoIml implements  IContentDao{
      */
     ExecutorService executorService = ExecutorUtils.getExecutorPool();
 
- //   static int maxLength = 100;
-
-
     @Autowired  //获取创建数据库连接的工厂
     MongoDatabaseFactory mongoDatabaseFactory;
-
   //  @Autowired
     MongoTemplate mongo;
 
@@ -57,49 +53,29 @@ public class ContentDaoIml implements  IContentDao{
 
     @Override//查询所有
     public List<Content> findAllContents(String collectionName) {
-        //cache search
-        redisUtils.exists(collectionName);
-        if(redisUtils.exists(collectionName)){
-           // List objects =
-            List<Content> list =  redisUtils.hmGetAll(collectionName,new Content());
-            System.out.println("from cache all");
-            return list;
-        }
+        List<Content> contents = null;
         //search DB
         Future<List<Content>> future = executorService.submit(new Callable<List<Content>>() {
             @Override
             public List<Content> call() throws Exception {
                 mongo = new MongoTemplate(mongoDatabaseFactory);
                 Query query = new Query();
-                List<Content> contents = mongo.find(query, Content.class,collectionName);
-                return contents;
+                List<Content> inContents = mongo.find(query, Content.class,collectionName);
+                return inContents;
             }
         });
         //mongo = MongoDBConnection.getTeplate();
-        List<Content> contents = null;
         try {
             contents = future.get();
-            //缓存更新
-            for(Content content:contents){
-                redisUtils.hmSet(collectionName, content.get_id(), content);
-            }
-            redisUtils.setContetnExpireTime(collectionName);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return contents;
     }
+
     @Override
     public Content findByID(String collectionName,String id) {
-
-
-        if(redisUtils.exists(collectionName)){
-            Content content = (Content)redisUtils.hmGet(collectionName, id);
-            System.out.println("from cache content----------");
-            if(content!= null)
-                return content;
-        }
-//查询数据库，应该不需要了
+            //查询数据库
         Future<Content> submit = null;
         submit = executorService.submit(new Callable<Content>() {
             @Override
@@ -107,7 +83,6 @@ public class ContentDaoIml implements  IContentDao{
                 mongo = new MongoTemplate(mongoDatabaseFactory);
                 Query query = new Query();
                 query.addCriteria(Criteria.where("_id").is(id));
-              //  System.out.println("search--------------"+query.toString());
                 Content content = mongo.findOne(query, Content.class,collectionName);
                 return content;
             }
@@ -115,7 +90,6 @@ public class ContentDaoIml implements  IContentDao{
         Content content = null;
         try {
             content = submit.get();
-            redisUtils.hmSet(collectionName, content.get_id(), content);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,19 +97,19 @@ public class ContentDaoIml implements  IContentDao{
     }
 
     @Override
-    public List<Content> findByTags(String collectionName,List<String> tags) {
+    public List<Content> findByTag(String collectionName,String tag) {
+        List<Content> contents = null;
         Future<List<Content>> future = executorService.submit(new Callable<List<Content>>() {
             @Override
             public List<Content> call() throws Exception {
                 mongo = new MongoTemplate(mongoDatabaseFactory);
                 Query query = new Query();
-                query.addCriteria(Criteria.where("tags").in(tags));
+                query.addCriteria(Criteria.where("tags").in(tag));
                 List<Content> contents = mongo.find(query, Content.class,collectionName);
                 return contents;
             }
         });
         //mongo = MongoDBConnection.getTeplate();
-        List<Content> contents = null;
         try {
             contents = future.get();
  //           cache.put(collectionName, contents);//加入缓存
@@ -145,4 +119,5 @@ public class ContentDaoIml implements  IContentDao{
         return contents;
 
     }
+
 }

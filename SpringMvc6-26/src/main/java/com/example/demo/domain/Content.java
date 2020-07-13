@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Data
 //@Document("javaDemo")
-public class Content {
+public class Content  {
     @Id
     private String _id;
 

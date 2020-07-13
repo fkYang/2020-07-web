@@ -35,7 +35,7 @@ public class RedisUtils {
     public void setContentSingletonExpireTime(String key){
         redisTemplate.expire(key, contentTimeNums, contentTimeUnit);
     }
-    public void setUserExpireTime(String key,Long expireTime, TimeUnit timeUnit){
+    public void setUserExpireTime(String key){
         redisTemplate.expire(key, userTimeNums,userTimeUnit);
     }
 

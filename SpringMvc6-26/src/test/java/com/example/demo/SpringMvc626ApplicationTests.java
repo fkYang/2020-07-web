@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.dao.ContentDaoIml;
 import com.example.demo.dao.UserDaoIml;
 import com.example.demo.domain.Content;
+import com.example.demo.domain.ListContent;
 import com.example.demo.domain.User;
 import com.example.demo.service.ContentService;
 import com.example.demo.utils.MongoDBConnection;
@@ -71,9 +72,19 @@ class SpringMvc626ApplicationTests {
     }
 
     @Test
+    void findByTags(){
+        List<String> tags = new ArrayList<>();
+        tags.add("JVM");
+    //    tags.add("distributed-system");
+        List<ListContent> listContents = contentService.findByTags(collectionName, tags);
+        for(ListContent content:listContents)
+            System.out.println(content.get_id() + "--" + content.getTitle());
+    }
+
+    @Test
     void findAll() {
-        List<Content> allContent = contentService.findAllContent(collectionName);
-        for(Content content:allContent)
+        List<ListContent> allContent = contentService.findAllContent(collectionName);
+        for(ListContent content:allContent)
             System.out.println(content.get_id());
 
 
@@ -84,19 +95,6 @@ class SpringMvc626ApplicationTests {
         for(Content content:contents)
             System.out.println(content.get_id());
     }
-    @Test
-    void findMonDB() {
 
-
-//        MongoDatabase db = ConnectionUtils.getMongoDB("TestDB");
-//        System.out.println(db+"-----------");
-//        FindIterable<Document> users = db.getCollection("users").find();
-//        MongoCursor<Document> iterator = users.iterator();
-//        while(iterator.hasNext()){
-//            System.out.println(iterator.next());
-//        }
-
-
-    }
 
 }

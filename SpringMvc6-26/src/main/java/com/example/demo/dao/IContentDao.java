@@ -20,5 +20,6 @@ public interface IContentDao {
 
     Content findByID(String collectionName,String id);
 
-    List<Content> findByTags(String collectionName,List<String> tags);
+   // List<Content> findByTags(String collectionName,List<String> tags);
+    List<Content> findByTag(String collectionName,String tag);
 }

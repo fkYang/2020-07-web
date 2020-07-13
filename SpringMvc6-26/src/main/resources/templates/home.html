@@ -15,26 +15,29 @@
 
 <body>
 <h1>welcome!</h1>
-<h2>hello , <span th:text="${session.user}==null?'View':${session.user.username}">NAME</span>?</h2>
+<h2>hello , <span th:text="${session.user}==null?'未注册用户':${session.user.username}">NAME</span>?</h2>
 
 
-<input type="submit" value="在线支付" onclick="display('lb')">
-<div id="lb" style="display:none">
-    <div >div属性：style ="display:none" 默认隐藏div</div>
-    <div th:text=" user&#45;&#45;  +${session.user}" >div属性：style ="display:none" 默认隐藏div</div>
+    <input type="submit" value="用户信息" onclick="display('lb')">
+    <div id="lb" style="display:none">
+    <div >用户信息：</div>
+    <div th:text=" user&#45;&#45;  +${session?.user?.getUsername()}" >未登录</div>
 <!--    -->
 </div>
 <p>login：</p>
-<a th:text="next" th:href="@{/user/login}"> for login </a>
+<a  th:href="@{/user/login}"> clike here for login </a>
 
 <p>content：</p>
 <!--<a th:text=studyContent th:href="@{/study/content}"> study </a>-->
 <form  th:action="@{/study/content}" id="loginForm">
     <label for="collectionName"> 选择类别:</label>
-    <select autofocus="true" name="studyType" id="collectionName" >
+    <select autofocus="true" name="collectionName" id="collectionName" >
 <!--        <option value="">&#45;&#45;Please choose an option&#45;&#45;</option>-->
         <option value ="java">java</option>
         <option value ="c-cpp">c-cpp</option>
+        <option value ="ComputerNetworking">ComputerNetworking</option>
+        <option value ="SQL">SQL</option>
+        <option value ="OperatingSystem">OS</option>
     </select>
     <br/>
     <input type="submit" value="getContens"/>

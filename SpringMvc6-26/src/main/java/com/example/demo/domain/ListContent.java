@@ -14,9 +14,8 @@ import java.util.List;
 @Data
 public class ListContent {
     @Id
-    private String _id;
-
-    private  String title;
-    private  String url;
-    private List<String> tags;
+    protected String _id;
+    protected  String title;
+    protected  String url;
+    protected List<String> tags;
 }

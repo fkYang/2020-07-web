@@ -1,11 +1,13 @@
 package com.example.demo.domain;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 //mport org.hibernate.validator.constraints.NotBlank;
 /**
  * 类描述
@@ -16,6 +18,8 @@ import javax.validation.constraints.Size;
 @Data
 @Document("users")
 public class User {
+    @Id
+    String _id;
     @NotBlank(message = "不能为空")
     private String username;
   //  private Integer age;
@@ -25,4 +29,6 @@ public class User {
 
     @NotEmpty(message = "不能为空")
     private  Address address;
+
+    private List<Seen> seen;
 }

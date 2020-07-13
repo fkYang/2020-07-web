@@ -17,7 +17,7 @@
 <body>
 <div>
     <a th:text="${ session?.user?.getUsername()}"> name </a>
-    <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
+    <button th:id="btn" >的个人空间</button>
 <!--    onClick="localRefresh()"-->
 </div>
 
@@ -33,13 +33,10 @@
         </tr>
         <tr th:each="content : ${contents}" >
             <td th:text="${content.getTitle()}"></td>
-<!--            <td >-->
-<!--                <a th:text="${content.getTags().toArray()[0]}"-->
-<!--                   th:href="@{/study/content/tags(tags= ${content.getTags().toArray()[0]} ,collectionName=${collectionName}) }">tags</a>-->
-<!--            </td>-->
             <td >
-                <a th:text="${content.getTags()}"
-                   th:href="@{/study/content/tags(tags= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>
+                <a th:text="${content.getTags()}"></a>
+<!--                <a th:text="${content.getTags()}"-->
+<!--                   th:href="@{/study/content/tags(tag= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>-->
             </td>
 
 
@@ -77,31 +74,29 @@
 <!--    </ul>-->
 </div>
 
-
-
-<!--
-    <form method="POST" th:action="@{/study/content/tags}" id="loginForm">
-        <a th:value="${collectionName}" th:name="collectionName"></a>
-
-        <label for="collectionName"> collectionName</label>
-        <input type ="checkbox" name="collectionName"  id="collectionName" th:text="${collectionName}" th:checked="true"> <br>
-        <label for="JVM">JVM: </label>
-        <input type ="checkbox" name="JVM"  id="JVM" > <br>
-
-        <label for="distributed-system">distributed-system: </label>
-        <input type ="checkbox" name="distributed-system" id="distributed-system" >  <br>
-
-        <input type="submit" value="getTags"  />
-    </form>
-    -->
-
-
-
-
 </body>
 
 
 </html>
+
+
+
+<!--    <form method="POST" th:action="@{/study/content/tags}" id="loginForm">-->
+<!--        <a th:value="${collectionName}" th:name="collectionName"></a>-->
+
+<!--        <label for="collectionName"> collectionName</label>-->
+<!--        <input type ="checkbox" name="collectionName"  id="collectionName" th:text="${collectionName}" th:checked="true"> <br>-->
+<!--        <label for="JVM">JVM: </label>-->
+<!--        <input type ="checkbox" name="JVM"  id="JVM" > <br>-->
+<!--        <label for="distributed-system">distributed-system: </label>-->
+<!--        <input type ="checkbox" name="distributed-system" id="distributed-system" >  <br>-->
+
+<!--        <input type="submit" value="getTags"  />-->
+<!--    </form>-->
+
+
+
+
 <!--<script>-->
 <!--    $('#btn').click(function () {-->
 <!--        var url = '/user';-->
