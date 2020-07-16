@@ -93,7 +93,7 @@ public class UserController {
 
         User user = (User ) request.getSession().getAttribute("user");
         if(user == null )
-            return "/home";
+            return "/login";
         List<Seen> seen = user.getSeen();
   //      List<String> classType = new ArrayList<>();
         model.addAttribute("seen", seen);
