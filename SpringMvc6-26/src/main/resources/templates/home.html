@@ -8,12 +8,14 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:href="@{/main.css}" rel="stylesheet" />
+    <link rel="icon" href="@{/test.ico}" >
 
 </head>
 
 <body>
-<h1>welcome!</h1>
-<h2>hello , <span th:text="${session.user}==null?'未注册用户':${session.user.username}">NAME</span>?</h2>
+<img src="/images/图标.jpg" width="242" height="189" alt=""/><img src="/images/java.jpg" width="242" height="189" alt=""/>
+<h1>Welcome!</h1>
+<h2>Hello, <span th:text="${session.user}==null?'未注册用户':${session.user.username}"></span></h2>
 
 
     <input type="submit" value="用户信息" onclick="display('lb')">
@@ -22,10 +24,10 @@
     <div th:text=" user&#45;&#45;  +${session?.user?.getUsername()}" >未登录</div>
 <!--    -->
 </div>
-<p>login：</p>
-<a  th:href="@{/user/login}"> clike here for login </a>
+<p>登陆：</p>
+<a  th:href="@{/user/login}"> 点击此登陆 </a>
 
-<p>content：</p>
+<!--<p>content：</p>-->
 <!--<a th:text=studyContent th:href="@{/study/content}"> study </a>-->
 <form  th:action="@{/study/content}" id="loginForm">
     <label for="collectionName"> 选择类别:</label>
@@ -38,7 +40,7 @@
         <option value ="OperatingSystem">OS</option>
     </select>
     <br/>
-    <input type="submit" value="getContens"/>
+    <input type="submit" value="显示面经列表"/>
 </form>
 
 
