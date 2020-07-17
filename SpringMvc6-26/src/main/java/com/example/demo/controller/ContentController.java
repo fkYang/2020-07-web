@@ -106,6 +106,10 @@ public class ContentController {
         if(map.containsKey("keyWord")){
             String keyWord  = map.get("keyWord");
             contents = contentService.findByName(collectionName, keyWord);
+            if(contents == null || contents.size() < 1){
+                model.addAttribute("error","未找到相关信息");
+                return "/nameError";
+            }
         }else{
             return "/home";
         }
