@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>错误界面-error</title>
+    <link th:href="@{/main.css}" rel="stylesheet" />
+    <link rel="shortcut icon" href="/图标.ico"/>
+    <link rel="bookmark" href="/图标.ico"/>
+  </head>
+  
+  <body>
+    <h1>Error</h1>
+    <p>
+      <a th:text="${error}== null ? 'error':${error} "> error</a>
+    </p>
+
+  </body>
+</html>
