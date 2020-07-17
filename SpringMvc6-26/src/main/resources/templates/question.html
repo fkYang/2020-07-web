@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>
+</head>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>thymeleaf内容展示</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div>
+    <a th:text="${ session?.user?.getUsername()}"> name </a>
+    <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
+    <!--    onClick="localRefresh()"-->
+</div>
+
+<!-- 需要局部刷新的部分，设置了th:fragment="table_refresh" -->
+<div th:id="id_user_list" style="text-align: center;margin:0 auto;width: 900px" th:fragment="user_list">
+    <!--    <h1 th:text="${title}"></h1>-->
+
+    <th:block width="100%" border="1" cellspacing="1" cellpadding="0">
+
+        <tr th:each="question : ${questions}" >
+
+            <td th:text="${question.getTitle()}"></td>
+            <!--            <td >-->
+            <!--                <a th:text="${content.getTags().toArray()[0]}"-->
+            <!--                   th:href="@{/study/content/tags(tags= ${content.getTags().toArray()[0]} ,collectionName=${collectionName}) }">tags</a>-->
+            <!--            </td>-->
+            <td >
+                <a th:text="${question.getTags()?.toArray()[0]}"
+                   th:href="@{/study/content(collectionName=${question.getTags()?.toArray()[0]}) }">tags</a>
+            </td>
+            <td >
+                <a th:text="${question.getTags().toArray()[1]}"
+                   th:href="@{/study/content/tags(tags= ${question.getTags()?.toArray()[1]} ,collectionName=${question.getTags()?.toArray()[0]}) }">tags</a>
+            </td>
+            <td >
+                <a th:text="${question.getTags().toArray()[2]}"
+                   th:href="@{/study/content/name(collectionName=${question.getTags()?.toArray()[0]} ,keyWord=${question.getTags()?.toArray()[2]}) }">tags</a>
+            </td>
+
+
+            <!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
+            <br/>
+            <td>
+                <a th:text="${question.getContent()}">Content</a>
+            </td>
+        </tr>
+
+    </th:block>
+    <div align="center">
+        <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '页'}"></b></a>
+        <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 页'"></b></a>
+        <a  th:href="@{/question(currentPage=${pageInfo.getFirstPage()})}"  >首题</a>
+        <a th:if="${pageInfo.isHasPreviousPage()} == true" th:href="@{/question(currentPage=${pageInfo.getPrePage()})}"  >上一题</a>
+        <a th:href="@{/question(currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
+        <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/question (currentPage=${pageInfo.getNextPage()})}" >下一题</a>
+        <a th:href="@{/question(currentPage=${pageInfo.getLastPage()})}" >尾题</a>
+    </div>
+
+    <div th:id="currentPageNum" th:text="${currentPage}" th:value="${currentPage}"></div>
+
+
+</div>
+
+
+
+
+
+
+</body>
+
+
+</html>

@@ -92,7 +92,12 @@ public class ContentService {
         }
         return listContents;
     }
+    public List<ListContent> findByName(String collectionName,String keyWord){
 
+        List<Content> contents = contentDao.findByName(collectionName, keyWord);
+        List<ListContent> listContents = convertList(contents);
+        return listContents;
+    }
 
     static public ListContent convert(Content content){
         ListContent listContent = new ListContent();

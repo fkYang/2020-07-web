@@ -75,25 +75,43 @@ public class ContentDaoIml implements  IContentDao{
 
     @Override
     public Content findByID(String collectionName,String id) {
-            //查询数据库
-        Future<Content> submit = null;
-        submit = executorService.submit(new Callable<Content>() {
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        List<Content> contents = find(collectionName, query);
+        if(contents != null && contents.size()>0)
+            return contents.get(0);
+        return null;
+    }
+
+    public List<Content> find(String collectionName,Query query){
+        //查询数据库
+        Future<List<Content>> submit = null;
+        submit = executorService.submit(new Callable<List<Content>>() {
             @Override
-            public Content call() throws Exception {
+            public List<Content> call() throws Exception {
                 mongo = new MongoTemplate(mongoDatabaseFactory);
-                Query query = new Query();
-                query.addCriteria(Criteria.where("_id").is(id));
-                Content content = mongo.findOne(query, Content.class,collectionName);
-                return content;
+//                Query query = new Query();
+//                query.addCriteria(Criteria.where("_id").is(id));
+                List<Content> contents = mongo.find(query, Content.class, collectionName);
+                return contents;
             }
         });
-        Content content = null;
+        List<Content> contents = null;
         try {
-            content = submit.get();
+            contents = submit.get();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return content;
+        return contents;
+    }
+
+
+    @Override
+    public List<Content> findByName(String collectionName, String keyWord) {
+        Query query = Query.query(Criteria.where("title").regex(keyWord));
+        List<Content> contents = find(collectionName, query);
+        return contents;
     }
 
     @Override

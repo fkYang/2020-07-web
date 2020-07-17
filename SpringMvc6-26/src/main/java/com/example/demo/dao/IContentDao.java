@@ -19,7 +19,7 @@ public interface IContentDao {
     List<Content> findAllContents(String collectionName);
 
     Content findByID(String collectionName,String id);
-
+    List<Content> findByName(String collectionName,String name);
    // List<Content> findByTags(String collectionName,List<String> tags);
     List<Content> findByTag(String collectionName,String tag);
 }

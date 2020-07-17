@@ -95,6 +95,27 @@ public class ContentController {
         return html;
     }
 
+
+    @RequestMapping("/content/name")
+    public String getNameList(@RequestParam Map<String, String> map  , Model model ,  HttpServletRequest request){
+        //获取参数
+        String collectionName  = map.get("collectionName");
+        System.out.println(collectionName);
+
+        List<ListContent> contents;
+        if(map.containsKey("keyWord")){
+            String keyWord  = map.get("keyWord");
+            contents = contentService.findByName(collectionName, keyWord);
+        }else{
+            return "/home";
+        }
+
+        model.addAttribute("contents", contents);
+        model.addAttribute("collectionName", collectionName);
+        return "/names";
+    }
+
+
     @RequestMapping("/content/tags")
     public String getTag(@RequestParam Map<String, String> map  , Model model,HttpServletRequest request){
 
