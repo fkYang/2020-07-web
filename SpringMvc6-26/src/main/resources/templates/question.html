@@ -50,9 +50,15 @@
 
             <!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
             <br/>
-            <td>
+            <input type="submit" value="用户信息" onclick="display('lb')">
+            <div id="lb" style="display:none">
+                <div >answer：</div>
                 <a th:text="${question.getContent()}">Content</a>
-            </td>
+            </div>
+
+<!--            <td>-->
+<!--               -->
+<!--            </td>-->
         </tr>
 
     </th:block>
@@ -77,6 +83,18 @@
 
 
 </body>
+
+<script type="text/javascript">
+
+    function display(id){
+        var traget=document.getElementById(id);
+        if(traget.style.display=="none"){
+            traget.style.display="";
+        }else{
+            traget.style.display="none";
+        }
+    }
+</script>
 
 
 </html>
