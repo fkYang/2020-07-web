@@ -92,7 +92,8 @@ public class UserController {
     public String self(HttpServletRequest request, @RequestParam Map<String, String> map ,Model model){
 
         User user = (User ) request.getSession().getAttribute("user");
-
+        if(user == null )
+            return "/login";
         List<Seen> seen = user.getSeen();
   //      List<String> classType = new ArrayList<>();
         model.addAttribute("seen", seen);
