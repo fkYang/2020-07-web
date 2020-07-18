@@ -52,6 +52,8 @@
                                 <td th:text="${question.getTitle()}"></td>
 
                                 <td >
+                                    <!--                <a th:text="${content.getTags()}"-->
+                                    <!--                   th:href="@{/study/content/tags(tag= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>-->
                                     <a th:text="${question.getTags()?.toArray()[0]}"
                                        th:href="@{/study/content(collectionName=${question.getTags()?.toArray()[0]}) }">tags</a>
                                 </td>
