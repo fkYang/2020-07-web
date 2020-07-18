@@ -35,54 +35,16 @@
 </head>
 
 <body>
-<div>
+<div align="right">
     <a th:text="${ session?.user?.getUsername()}"> name </a>
     <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
     <!--    onClick="localRefresh()"-->
 </div>
 
-<!-- 需要局部刷新的部分，设置了th:fragment="table_refresh" -->
-<div th:id="id_user_list" style="text-align: center;margin:0 auto;width: 900px" th:fragment="user_list">
-<!--        <h1 th:text="${title}"></h1>-->
-    <table width="100%" border="1" cellspacing="1" cellpadding="0">
-        <tr>
-            <td>名字</td>
-            <td>标签</td>
-            <td>原始Url:(来源)</td>
-            <td>点击查看内容</td>
-        </tr>
-        <tr th:each="content : ${contents}" >
-            <td th:text="${content.getTitle()}"></td>
-            <!--            <td >-->
-            <!--                <a th:text="${content.getTags().toArray()[0]}"-->
-            <!--                   th:href="@{/study/content/tags(tags= ${content.getTags().toArray()[0]} ,collectionName=${collectionName}) }">tags</a>-->
-            <!--            </td>-->
-            <td >
-                <a th:text="${content.getTags()}"
-                   th:href="@{/study/content/tags(tags= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>
-            </td>
 
+<div th:id="id_user_list" style="text-align: center;margin:0 auto;width:auto" th:fragment="user_list">
 
-            <td>
-                <a th:href="${content.getUrl()}">原始URL</a>
-            </td>
-
-            <!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
-            <td>
-                <a th:href="@{/study/content/detail(collectionName= ${collectionName},id = ${content.get_id()} )}">Content</a>
-            </td>
-
-        </tr>
-
-    </table>
     <div align="center">
-        <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '页'}"></b></a>
-        <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 页'"></b></a>
-        <a  th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getFirstPage()})}"  >首页</a>
-        <a th:if="${pageInfo.isHasPreviousPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getPrePage()})}"  >上一页</a>
-        <a th:href="@{/study/content(collectionName=${collectionName},currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
-        <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getNextPage()})}" >下一页</a>
-        <a th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getLastPage()})}" >尾页</a>
         <div class="overlay"></div>
         <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
             <source src="/mp4/bg.mp4" type="video/mp4">
@@ -90,25 +52,13 @@
 
     </div>
 
+
     <div class="masthead">
         <div class="masthead-bg"></div>
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-12 my-auto">
-                    <div class="masthead-content text-white py-5 py-md-0">
-
-                        <div th:id="currentPageNum" th:text="${currentPage}" th:value="${currentPage}"></div>
-
-                    </div>
-                    <!-- 从这开始写!  -->
-                    <div>
-                        <a th:text="${ session?.user?.getUsername()}"> name </a>
-                        <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
-                        <!--    onClick="localRefresh()"-->
-                    </div>
-
-                    <!-- 需要局部刷新的部分，设置了th:fragment="table_refresh" -->
-                    <div th:id="id_user_list" style="text-align: center;margin:0 auto;width: 900px" th:fragment="user_list">
+                    <div th:id="id_user_list" style="text-align: center;margin:0 auto;width:auto" th:fragment="user_list">
 
                         <table width="100%" border="1" cellspacing="1" cellpadding="0">
                             <tr>
@@ -125,27 +75,16 @@
                                        th:href="@{/study/content/tags(tags= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>
                                 </td>
 
-
                                 <td>
                                     <a th:href="${content.getUrl()}">原始URL</a>
                                 </td>
 
-                                <!--
-                                    <form method="POST" th:action="@{/study/content/tags}" id="loginForm">
-                                        <a th:value="${collectionName}" th:name="collectionName"></a>
-                                                                            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
                                 <td>
                                     <a th:href="@{/study/content/detail(collectionName= ${collectionName},id = ${content.get_id()} )}">Content</a>
                                 </td>
 
-<!--                                <label for="collectionName"> collectionName</label>-->
-<!--                                <input type ="checkbox" name="collectionName"  id="collectionName" th:text="${collectionName}" th:checked="true"> <br>-->
-<!--                                <label for="JVM">JVM: </label>-->
-<!--                                <input type ="checkbox" name="JVM"  id="JVM" > <br>-->
                             </tr>
 
-<!--                            <label for="distributed-system">distributed-system: </label>-->
-<!--                            <input type ="checkbox" name="distributed-system" id="distributed-system" >  <br>-->
                         </table>
                         <div align="center">
                             <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '页'}"></b></a>
@@ -156,9 +95,9 @@
                             <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getNextPage()})}" >下一页</a>
                             <a th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getLastPage()})}" >尾页</a>
 
-<!--                            <input type="submit" value="getTags"  />-->
+
                             </form>
-<!--                            &ndash;&gt;-->
+
                         </div>
 
                         <div th:id="currentPageNum" th:text="${currentPage}" th:value="${currentPage}"></div>
@@ -172,6 +111,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 
 
