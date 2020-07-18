@@ -11,17 +11,7 @@
     <p>New here? Click
       <a th:href="@{/user/register}">here</a> to register.</p>
     
-<!--    <p>New here? Click -->
-<!--       <a th:href="@{/register}">here</a> to register.</p>-->
-    
-    <!-- tag::thAction[] -->
-    <!--action指定controller中对应的方法路径即可!-->
-<!--    <form method="POST"  th:action="@{/user/login}">-->
-<!--      &lt;!&ndash;    th:action="@{../user/login}" >&ndash;&gt;-->
-<!--      <label for="username">用户名:<input type="text" id="username" name="username" /></label>-->
-<!--      <label for="password">密码:<input type="text" id="password" name="password" /></label>-->
-<!--      <input type="submit" value="登陆">-->
-<!--    </form>-->
+
     <form method="POST" th:action="@{/user/login}" id="loginForm">
     <!-- end::thAction[] -->
       <label for="username">Username: </label>

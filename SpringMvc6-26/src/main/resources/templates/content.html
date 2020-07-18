@@ -1,156 +1,123 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>详细内容-content</title>
-    <link th:href="@{/main.css}" rel="stylesheet" />
-    <link rel="shortcut icon" href="/图标书.ico"/>
-</head>
+<html lang="en">
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>thymeleaf内容展示</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>详细内容-content</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/coming-soon.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/图标书.ico"/>
+
 </head>
 
 <body>
-<div>
-    <a th:text="${ session?.user?.getUsername()}"> name </a>
-    <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
-<!--    onClick="localRefresh()"-->
-</div>
 
-<!-- 需要局部刷新的部分，设置了th:fragment="table_refresh" -->
-<div th:id="id_user_list" style="text-align: center;margin:0 auto;width: 900px" th:fragment="user_list">
-<!--    <h1 th:text="${title}"></h1>-->
-    <table width="100%" border="1" cellspacing="1" cellpadding="0">
-        <tr>
-            <td>名字</td>
-            <td>标签</td>
-            <td>原始Url:(来源)</td>
-            <td>点击查看内容</td>
-        </tr>
-        <tr th:each="content : ${contents}" >
-            <td th:text="${content.getTitle()}"></td>
-<!--            <td >-->
-<!--                <a th:text="${content.getTags().toArray()[0]}"-->
-<!--                   th:href="@{/study/content/tags(tags= ${content.getTags().toArray()[0]} ,collectionName=${collectionName}) }">tags</a>-->
-<!--            </td>-->
-            <td >
-                <a th:text="${content.getTags()}"
-                   th:href="@{/study/content/tags(tags= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>
-            </td>
+<div class="overlay"></div>
+<video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="/mp4/bg.mp4" type="video/mp4">
+</video>
+
+<div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-12 my-auto">
+                <div class="masthead-content text-white py-5 py-md-0">
 
 
-            <td>
-                <a th:href="${content.getUrl()}">原始URL</a>
-            </td>
+                    <!-- 从这开始写!  -->
+                    <div>
+                        <a th:text="${ session?.user?.getUsername()}"> name </a>
+                        <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
+                        <!--    onClick="localRefresh()"-->
+                    </div>
 
-<!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
-            <td>
-                <a th:href="@{/study/content/detail(collectionName= ${collectionName},id = ${content.get_id()} )}">Content</a>
-            </td>
+                    <!-- 需要局部刷新的部分，设置了th:fragment="table_refresh" -->
+                    <div th:id="id_user_list" style="text-align: center;margin:0 auto;width: 900px" th:fragment="user_list">
 
-        </tr>
+                        <table width="100%" border="1" cellspacing="1" cellpadding="0">
+                            <tr>
+                                <td>名字</td>
+                                <td>标签</td>
+                                <td>原始Url:(来源)</td>
+                                <td>点击查看内容</td>
+                            </tr>
+                            <tr th:each="content : ${contents}" >
+                                <td th:text="${content.getTitle()}"></td>
 
-    </table>
-    <div align="center">
-        <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '页'}"></b></a>
-        <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 页'"></b></a>
-        <a  th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getFirstPage()})}"  >首页</a>
-        <a th:if="${pageInfo.isHasPreviousPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getPrePage()})}"  >上一页</a>
-        <a th:href="@{/study/content(collectionName=${collectionName},currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
-        <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getNextPage()})}" >下一页</a>
-        <a th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getLastPage()})}" >尾页</a>
+                                <td >
+                                    <a th:text="${content.getTags()}"
+                                       th:href="@{/study/content/tags(tags= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>
+                                </td>
 
+
+                                <td>
+                                    <a th:href="${content.getUrl()}">原始URL</a>
+                                </td>
+
+                                <!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
+                                <td>
+                                    <a th:href="@{/study/content/detail(collectionName= ${collectionName},id = ${content.get_id()} )}">Content</a>
+                                </td>
+
+                            </tr>
+
+                        </table>
+                        <div align="center">
+                            <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '页'}"></b></a>
+                            <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 页'"></b></a>
+                            <a  th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getFirstPage()})}"  >首页</a>
+                            <a th:if="${pageInfo.isHasPreviousPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getPrePage()})}"  >上一页</a>
+                            <a th:href="@{/study/content(collectionName=${collectionName},currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
+                            <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getNextPage()})}" >下一页</a>
+                            <a th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getLastPage()})}" >尾页</a>
+
+                        </div>
+
+                        <div th:id="currentPageNum" th:text="${currentPage}" th:value="${currentPage}"></div>
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div th:id="currentPageNum" th:text="${currentPage}" th:value="${currentPage}"></div>
-
-<!--    <ul class="pagination" style="margin-left: 50%">-->
-<!--        <li class="page-item"><a class="page-link"><span th:text="第+${pageInfo.pageNum}+页"></span></a></li>-->
-<!--        <li class="page-item"><a class="page-link" th:href="@{/user}">首页</a></li>-->
-<!--        <li class="page-item"><a class="page-link" th:href="@{/user(pageNum=${pageInfo.pages})}">尾页</a></li>-->
-<!--        <li class="page-item"><a class="page-link" th:href="@{/user(pageNum=${pageInfo.prePage})}">Last</a></li>-->
-<!--        <li class="page-item"><a class="page-link" th:href="@{/user(pageNum=${pageInfo.getNextPage()})}">Next</a></li>-->
-<!--    </ul>-->
 </div>
 
 
 
-<!--
-    <form method="POST" th:action="@{/study/content/tags}" id="loginForm">
-        <a th:value="${collectionName}" th:name="collectionName"></a>
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <label for="collectionName"> collectionName</label>
-        <input type ="checkbox" name="collectionName"  id="collectionName" th:text="${collectionName}" th:checked="true"> <br>
-        <label for="JVM">JVM: </label>
-        <input type ="checkbox" name="JVM"  id="JVM" > <br>
-
-        <label for="distributed-system">distributed-system: </label>
-        <input type ="checkbox" name="distributed-system" id="distributed-system" >  <br>
-
-        <input type="submit" value="getTags"  />
-    </form>
-    -->
-
-
-
+<!-- Custom scripts for this template -->
+<script src="/js/coming-soon.min.js"></script>
 
 </body>
 
+<!-- 在这里添加脚本!!-->
+
+
+
 
 </html>
-<!--<script>-->
-<!--    $('#btn').click(function () {-->
-<!--        var url = '/user';-->
-<!--        var nextNum = document.getElementById("currentPageNum").innerText;-->
-
-<!--   //     $(".user_list").load(url);-->
-<!--        $.ajax({-->
-<!--            url: url,-->
-<!--            type: 'POST',-->
-<!--            data: {"pageNum": nextNum },-->
-<!--            success: function (data) {-->
-<!--                alert("success");-->
-<!--                 $("#id_user_list").html(data);-->
-<!--               // $(".user_list").load(url);-->
-<!--            },-->
-<!--            error: function() {-->
-<!--                //TODO-->
-<!--                alert("error,no more data");-->
-
-<!--            }-->
-
-
-<!--        })-->
-<!--    })-->
-<!--</script>-->
-
-
-<!--<script>-->
-<!--    function editCustomer() {-->
-<!--        $.ajax({-->
-<!--            type:"post",-->
-<!--            url:"/usr",-->
-<!--          //  data:{"":},-->
-<!--            success:function(data) {-->
-<!--                $("#edit_cust_id").val(data.cust_id);-->
-<!--                $("#cust_name").val(data.cust_name);-->
-<!--                $("#edit_customerFrom").val(data.cust_source);-->
-<!--                $("#edit_custIndustry").val(data.cust_industry);-->
-<!--                $("#edit_custLevel").val(data.cust_level);-->
-<!--                $("#edit_linkMan").val(data.cust_linkman);-->
-<!--                $("#edit_phone").val(data.cust_phone);-->
-<!--                $("#edit_mobile").val(data.cust_mobile);-->
-<!--                $("#edit_zipcode").val(data.cust_zipcode);-->
-<!--                $("#edit_address").val(data.cust_address);-->
-
-<!--            }-->
-<!--        });-->
-<!--    )-->
-
-<!--</script>-->
-
-

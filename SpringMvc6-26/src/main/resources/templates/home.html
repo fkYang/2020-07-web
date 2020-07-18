@@ -1,66 +1,90 @@
 <!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
-    <title>面经网站-主页-home
 
-    </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/main.css}" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/coming-soon.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="/图标书.ico"/>
 
 </head>
 
 <body>
-<img src="/images/图标.jpg" width="242" height="189" alt=""/><img src="/images/java.jpg" width="242" height="189" alt=""/>
-<h1>Welcome!</h1>
-<h2>Hello, <span th:text="${session.user}==null?'未注册用户':${session.user.username}"></span></h2>
+
+<div class="overlay"></div>
+<video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="mp4/bg.mp4" type="video/mp4">
+</video>
+
+<div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-12 my-auto">
+                <div class="masthead-content text-white py-5 py-md-0">
 
 
-    <input type="submit" value="用户信息" onclick="display('lb')">
-    <div id="lb" style="display:none">
-    <div >用户信息：</div>
-    <div th:text=" user&#45;&#45;  +${session?.user?.getUsername()}" >未登录</div>
-<!--    -->
+
+
+                    <h1 class="mb-3">Welcome!</h1>
+                    <h2>hello , <span th:text="${session.user}==null?'未注册用户':${session.user.username}">NAME</span></h2>
+                    <input type="submit" value="用户信息" onclick="display('lb')">
+                    <div id="lb" style="display:none">
+                        <div >用户信息：</div>
+                        <div th:text=" user&#45;&#45;  +${session?.user?.getUsername()}" >未登录</div>
+                        <!--    -->
+                    </div>
+                    <p>登陆：</p>
+                    <a  th:href="@{/user/login}"> 点击此登陆 </a></p>
+                    <form  th:action="@{/study/content}" id="loginForm">
+                        <label for="collectionName"> 选择类别:</label>
+                        <select autofocus="true" name="collectionName" id="collectionName" >
+                            <!--        <option value="">&#45;&#45;Please choose an option&#45;&#45;</option>-->
+                            <option value ="java">java</option>
+                            <option value ="c-cpp">c-cpp</option>
+                            <option value ="ComputerNetworking">ComputerNetworking</option>
+                            <option value ="SQL">SQL</option>
+                            <option value ="OperatingSystem">OS</option>
+                        </select>
+                        <br/>
+                        <input type="submit" value="显示面经列表"/>
+                    </form>
+                    <p>题库：</p>
+                    <a  th:href="@{/question}"> 点击进入题库 </a>
+
+                    <div class="input-group input-group-newsletter">
+                        <div class="input-group-append"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>登陆：</p>
-<a  th:href="@{/user/login}"> 点击此登陆 </a>
-
-<!--<p>content：</p>-->
-<!--<a th:text=studyContent th:href="@{/study/content}"> study </a>-->
-<form  th:action="@{/study/content}" id="loginForm">
-    <label for="collectionName"> 选择类别:</label>
-    <select autofocus="true" name="collectionName" id="collectionName" >
-<!--        <option value="">&#45;&#45;Please choose an option&#45;&#45;</option>-->
-        <option value ="java">java</option>
-        <option value ="c-cpp">c-cpp</option>
-        <option value ="ComputerNetworking">ComputerNetworking</option>
-        <option value ="SQL">SQL</option>
-        <option value ="OperatingSystem">OS</option>
-    </select>
-    <br/>
-    <input type="submit" value="显示面经列表"/>
-</form>
-<p>题库：</p>
-<a  th:href="@{/question}"> 点击进入题库 </a>
 
 
+
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/js/coming-soon.min.js"></script>
 
 </body>
 
-
-
-
-<script type="text/javascript">
-
-    function display(id){
-        var traget=document.getElementById(id);
-        if(traget.style.display=="none"){
-            traget.style.display="";
-        }else{
-            traget.style.display="none";
-        }
-    }
-</script>
 </html>
