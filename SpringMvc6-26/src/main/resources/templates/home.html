@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -84,7 +83,17 @@
 
 <!-- Custom scripts for this template -->
 <script src="/js/coming-soon.min.js"></script>
+<script type="text/javascript">
 
+    function display(id){
+        var traget=document.getElementById(id);
+        if(traget.style.display=="none"){
+            traget.style.display="";
+        }else{
+            traget.style.display="none";
+        }
+    }
+</script>
 </body>
 
 </html>
