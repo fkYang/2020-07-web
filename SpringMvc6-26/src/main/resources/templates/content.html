@@ -1,10 +1,6 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,53 +8,45 @@
     <meta name="author" content="">
 
     <title>详细内容-content</title>
-    <link th:href="@{/main.css}" rel="stylesheet" />
 
     <!-- Bootstrap core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
     <link href="/css/coming-soon.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="/图标书.ico"/>
-</head>
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>thymeleaf内容展示</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
-<div align="right">
-    <a th:text="${ session?.user?.getUsername()}"> name </a>
-    <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
-    <!--    onClick="localRefresh()"-->
-</div>
+
+<div class="overlay"></div>
 
 
-<div th:id="id_user_list" style="text-align: center;margin:0 auto;width:auto" th:fragment="user_list">
-
-    <div align="center">
-        <div class="overlay"></div>
-        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="/mp4/bg.mp4" type="video/mp4">
-        </video>
-
-    </div>
+<div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-12 my-auto">
+                <div class="masthead-content text-white py-5 py-md-0">
+                    <!--在这里输入内容-->
 
 
-    <div class="masthead">
-        <div class="masthead-bg"></div>
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-12 my-auto">
-                    <div th:id="id_user_list" style="text-align: center;margin:0 auto;width:auto" th:fragment="user_list">
+                    <div>
+                        <a th:text="${ session?.user?.getUsername()}"> name </a>
+                        <!--<button th:id="btn" >的个人空间</button>-->
+                        <button th:id="btn"   th:onclick="location='/user/self'">的个人空间</button>
+                        <!--    onClick="localRefresh()"-->
+                    </div>
+
+                    <!-- 需要局部刷新的部分，设置了th:fragment="table_refresh" -->
+                    <div th:id="id_user_list" style="text-align: center;margin:0 auto;width: auto" th:fragment="user_list">
+                        <!--    <h1 th:text="${title}"></h1>-->
                         <table width="100%" border="1" cellspacing="1" cellpadding="0">
                             <tr>
                                 <td>名字</td>
@@ -68,16 +56,17 @@
                             </tr>
                             <tr th:each="content : ${contents}" >
                                 <td th:text="${content.getTitle()}"></td>
-
                                 <td >
                                     <a th:text="${content.getTags()}"
                                        th:href="@{/study/content/tags(tags= ${content.getTags()} ,collectionName=${collectionName}) }">tags</a>
                                 </td>
 
+
                                 <td>
                                     <a th:href="${content.getUrl()}">原始URL</a>
                                 </td>
 
+                                <!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
                                 <td>
                                     <a th:href="@{/study/content/detail(collectionName= ${collectionName},id = ${content.get_id()} )}">Content</a>
                                 </td>
@@ -94,24 +83,27 @@
                             <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getNextPage()})}" >下一页</a>
                             <a th:href="@{/study/content(collectionName=${collectionName} ,currentPage=${pageInfo.getLastPage()})}" >尾页</a>
 
-
-                            </form>
-
                         </div>
 
                         <div th:id="currentPageNum" th:text="${currentPage}" th:value="${currentPage}"></div>
 
-
+                        <!--    <ul class="pagination" style="margin-left: 50%">-->
+                        <!--        <li class="page-item"><a class="page-link"><span th:text="第+${pageInfo.pageNum}+页"></span></a></li>-->
+                        <!--        <li class="page-item"><a class="page-link" th:href="@{/user}">首页</a></li>-->
+                        <!--        <li class="page-item"><a class="page-link" th:href="@{/user(pageNum=${pageInfo.pages})}">尾页</a></li>-->
+                        <!--        <li class="page-item"><a class="page-link" th:href="@{/user(pageNum=${pageInfo.prePage})}">Last</a></li>-->
+                        <!--        <li class="page-item"><a class="page-link" th:href="@{/user(pageNum=${pageInfo.getNextPage()})}">Next</a></li>-->
+                        <!--    </ul>-->
                     </div>
 
 
 
+
+                    <!--在这里输入内容-->
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 
 
@@ -122,14 +114,17 @@
 
 <!-- Custom scripts for this template -->
 <script src="/js/coming-soon.min.js"></script>
+<script type="text/javascript">
 
+  function display(id){
+      var traget=document.getElementById(id);
+      if(traget.style.display=="none"){
+          traget.style.display="";
+      }else{
+          traget.style.display="none";
+      }
+  }
+</script>
 </body>
-
-<!-- 在这里添加脚本!!-->
-
-
-</html>
-
-
 
 </html>

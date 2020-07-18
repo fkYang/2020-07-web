@@ -1,51 +1,98 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>注册界面-register</title>
-    <link th:href="@{/main.css}" rel="stylesheet" />
-    <link rel="shortcut icon" href="/图标书.ico"/>
-  </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
 
-  <body>
-    <h1>regesiter</h1>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    
+  <title>注册界面-register</title>
 
-    <form method="POST" th:action="@{/user/register}" id="loginForm">
-    <!-- end::thAction[] -->
-      <label for="username">Username: </label>
-      <input type="text" name="username" id="username"  />
-      <span th:text="${usernameError}==null?' ':${usernameError}">NAME</span><br/>
-      
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password" /><br/>
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-<!--      <label>-->
-<!--        <select th:id="type" th:name="temp">-->
-<!--          <option value ="volvo">Volvo</option>-->
-<!--          <option value ="saab">Saab</option>-->
-<!--          <option value="opel">Opel</option>-->
-<!--          <option value="audi">Audi</option>-->
-<!--        </select>-->
-<!--      </label>-->
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/coming-soon.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/图标书.ico"/>
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
 
 
-<!--      <input type="text" name="address.province" id="address.province" /><br/>-->
-      <label for="address.province"> Address.province:</label>
-        <select autofocus="true" name="address.province" id="address.province" >
-          <option value="">--Please choose an option--</option>
-          <option value ="volvo">Volvo</option>
-          <option value ="saab">Saab</option>
-          <option value="opel">Opel</option>
-         <option value="audi">Audi</option>
-        </select>
-      <br/>
+<div class="masthead">
+  <div class="masthead-bg"></div>
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-12 my-auto">
+        <div class="masthead-content text-white py-5 py-md-0">
+          <!--在这里输入内容-->
+          <h1>Regesiter</h1>
 
-      <label for="addresscity">Address.city </label>
-      <input type="text" name="address.city" id="addresscity" /><br/>
 
-      <input type="submit" value="Register"/>
-    </form>
-  </body>
+
+          <form method="POST" th:action="@{/user/register}" id="loginForm">
+            <!-- end::thAction[] -->
+            <label for="username">Username: </label>
+            <input type="text" name="username" id="username"  />
+            <span th:text="${usernameError}==null?' ':${usernameError}">NAME</span><br/>
+
+            <label for="password">Password: </label>
+            <input type="password" name="password" id="password" /><br/>
+
+            <!--      <label>-->
+            <!--        <select th:id="type" th:name="temp">-->
+            <!--          <option value ="volvo">Volvo</option>-->
+            <!--          <option value ="saab">Saab</option>-->
+            <!--          <option value="opel">Opel</option>-->
+            <!--          <option value="audi">Audi</option>-->
+            <!--        </select>-->
+            <!--      </label>-->
+
+
+            <!--      <input type="text" name="address.province" id="address.province" /><br/>-->
+            <label for="address.province"> Address.province:</label>
+            <select autofocus="true" name="address.province" id="address.province" >
+              <option value="">--Please choose an option--</option>
+              <option value ="volvo">Volvo</option>
+              <option value ="saab">Saab</option>
+              <option value="opel">Opel</option>
+              <option value="audi">Audi</option>
+            </select>
+            <br/>
+
+            <label for="addresscity">Address.city </label>
+            <input type="text" name="address.city" id="addresscity" /><br/>
+
+            <input type="submit" value="Register"/>
+          </form>
+
+
+
+          <!--在这里输入内容-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/js/coming-soon.min.js"></script>
+
+</body>
+
 </html>
