@@ -72,10 +72,12 @@ public class UserController {
         return "/register";
     }
     @PostMapping("/register")
-    public String postRegister(User user,Model model){
+    public String postRegister(User user,Model model){//,HttpServletRequest request ){
         //密码加密
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
+//        System.out.println(request.toString());
+//        Map<String, String[]> parameterMap = request.getParameterMap();
         boolean result = userService.saveUser(user);
         //判断是否存在用户
   //      System.out.println(user.toString());

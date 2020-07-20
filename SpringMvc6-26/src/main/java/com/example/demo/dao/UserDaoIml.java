@@ -40,7 +40,7 @@ public class UserDaoIml implements IUserDao {
 
         User user1 = findByName(user.getUsername());
         if(user1 != null)
-            return user1;
+            return null;
         System.out.println("save user");
 
         //匿名内部类，创建 任务，提交至线程池实现
