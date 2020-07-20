@@ -69,7 +69,7 @@
 
                                 <!--            <td th:text="${content.getUrl()}"  th :onclick="'window.location.href= ${'''/removeContact'''}'">-->
                                 <br/>
-                                <input type="submit" value="用户信息" onclick="display('lb')">
+                                <input type="submit" value="ans" onclick="display('lb')">
                                 <div id="lb" style="display:none">
                                     <div >answer：</div>
                                     <a th:text="${question.getContent()}">Content</a>
@@ -80,11 +80,11 @@
 
                         </th:block>
                         <div align="center">
-                            <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '页'}"></b></a>
-                            <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 页'"></b></a>
+                            <a class="currentPage"> <b th:text="'第'+ ${pageInfo.getPageNumber() + '题'}"></b></a>
+                            <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 题'"></b></a>
                             <a  th:href="@{/question(currentPage=${pageInfo.getFirstPage()})}"  >首题</a>
                             <a th:if="${pageInfo.isHasPreviousPage()} == true" th:href="@{/question(currentPage=${pageInfo.getPrePage()})}"  >上一题</a>
-                            <a th:href="@{/question(currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}+' '"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
+                            <a th:href="@{/question(currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}+' ' "   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
                             <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/question (currentPage=${pageInfo.getNextPage()})}" >下一题</a>
                             <a th:href="@{/question(currentPage=${pageInfo.getLastPage()})}" >尾题</a>
                         </div>
