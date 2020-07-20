@@ -33,6 +33,7 @@ public class QuestionService {
         }else{
             questions = questionDao.getAll();
             redisUtils.set(question, questions);
+            redisUtils.setQuestionExpireTime(question);
         }
         return questions;
     }
