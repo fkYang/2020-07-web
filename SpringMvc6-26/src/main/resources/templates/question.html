@@ -84,7 +84,7 @@
                             <a class="allpage"><b th:text="'共 '+ ${pageInfo.getPages()}+ ' 页'"></b></a>
                             <a  th:href="@{/question(currentPage=${pageInfo.getFirstPage()})}"  >首题</a>
                             <a th:if="${pageInfo.isHasPreviousPage()} == true" th:href="@{/question(currentPage=${pageInfo.getPrePage()})}"  >上一题</a>
-                            <a th:href="@{/question(currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
+                            <a th:href="@{/question(currentPage=  ${i})}"  th:each="i :${#numbers.sequence(pageInfo.getFirstPage(), pageInfo.getLastPage())}" th:text="  ${i}+' '"   th:class="${pageInfo.getPageNumber() == i}? 'page-item active' :' page-item' "></a>
                             <a th:if="${pageInfo.isHasNextPage()} == true" th:href="@{/question (currentPage=${pageInfo.getNextPage()})}" >下一题</a>
                             <a th:href="@{/question(currentPage=${pageInfo.getLastPage()})}" >尾题</a>
                         </div>
