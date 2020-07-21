@@ -59,6 +59,8 @@ public class ContentService {
                 return content;
         }else{
             content = contentDao.findByID(collectionName, id);
+            if(content == null )
+                return null;
             redisUtils.hmSet(collectionName, content.get_id(), content);
         }
         return content;
@@ -80,12 +82,16 @@ public class ContentService {
             else{//查询数据库，获取对应tag的数据
                 List<Content> contents = contentDao.findByTag(collectionName, tag);
                 listContentstemp = convertList(contents);
+                if( listContentstemp == null)
+                    return null;
                 //更新缓存，tag缓存
                 for(ListContent listContent:listContentstemp){
                     redisUtils.add(name, listContent);
                 }
+
             }
             //加入结果集合
+
             listContents.addAll(listContentstemp);
             //设置缓存时间
             redisUtils.setContetnExpireTime(name);
@@ -100,6 +106,8 @@ public class ContentService {
     }
 
     static public ListContent convert(Content content){
+        if(content == null)
+            return null;
         ListContent listContent = new ListContent();
         listContent.set_id(content.get_id());
         listContent.setTags(content.getTags());
@@ -108,6 +116,8 @@ public class ContentService {
         return  listContent;
     }
     static private List<ListContent> convertList(List<Content> contents){
+        if(contents == null)
+            return null;
 
         List<ListContent> listContent = new ArrayList<>();
         for( Content content:contents){

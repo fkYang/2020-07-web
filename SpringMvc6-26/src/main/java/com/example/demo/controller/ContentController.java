@@ -55,6 +55,10 @@ public class ContentController {
         model.addAttribute("collectionName", collectionName);
 //        System.out.println(collectionName);
         List<ListContent> contents = contentService.findAllContent(collectionName);
+        if(contents == null || contents.size() == 0){
+            model.addAttribute("error","未找到相关信息:"+collectionName);
+            return "/nameError";
+        }
      //   model.addAttribute("contents", contents);
      //   Object o =model.getAttribute("currentPage");
 //        int i = Integer.valueOf(map.get("currentPage"));
@@ -75,6 +79,10 @@ public class ContentController {
 
         System.out.println(collectionName);
         Content content = contentService.findById(collectionName, id);
+        if(content == null){
+            model.addAttribute("error","未找到相关信息:"+id);
+            return "/nameError";
+        }
         String mdTest = content.getContent();
 //        StringBuilder builder = new StringBuilder();
 //        builder.append("<html>\n" + "<body>");
@@ -145,8 +153,13 @@ public class ContentController {
                 }
             }
         }
-
-        contents.addAll(contentService.findByTags(collectionName,tags ));
+        List<ListContent> listContents = contentService.findByTags(collectionName, tags);
+//null
+        if(listContents == null || listContents.size() == 0){
+            model.addAttribute("error","未找到相关信息:"+tags.toString());
+            return "/nameError";
+        }
+        contents.addAll(listContents);
 
         PageUtil<ListContent> pageInfo = new PageUtil<>(Integer.valueOf(map.get("currentPage")), limitItem, contents);
         // PageUtil<Content> pageInfo = new PageUtil<>(Integer.valueOf((Integer) model.getAttribute("currentPage")), 1, contents);
