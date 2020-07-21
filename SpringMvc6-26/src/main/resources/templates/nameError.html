@@ -39,8 +39,9 @@
 
           <body>
           <h1>Error</h1>
+          <h2>你来到了没有知识的荒原...</h2>
           <p>
-            <a th:text="${error}== null ? 'error':${error} "> error</a>
+            <a th:text="${error}== null ? 'error':${error} +',面经库中还没有相关内容'"> error</a>
           </p>
 
           </body>
