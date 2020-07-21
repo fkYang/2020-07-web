@@ -26,9 +26,15 @@ public class RedisUtils {
     static Long contentAllTimeNums = 2l;
     TimeUnit contentAllTimeUnit = TimeUnit.HOURS;
 
+    static Long questionTimeNums = 2l;
+    TimeUnit questionTimeUnit = TimeUnit.HOURS;
+
 
     //设置对应的key过期时间
     //
+    public void setQuestionExpireTime(String key){
+        redisTemplate.expire(key, questionTimeNums,questionTimeUnit);
+    }
     public void setExpireTime(String key,Long expireTime, TimeUnit timeUnit){
         redisTemplate.expire(key, expireTime, timeUnit);
     }
