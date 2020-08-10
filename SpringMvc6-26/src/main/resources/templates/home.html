@@ -39,7 +39,7 @@
 
 
                     <h1 class="mb-3">Welcome!</h1>
-                    <h2>hello , <span th:text="${session.user}==null?'未注册用户':${session.user.username}">NAME</span></h2>
+                    <h2>Hello , <span th:text="${session.user}==null?'您还未登录':${session.user.username}">NAME</span></h2>
                     <input type="submit" value="用户信息" onclick="display('lb')">
                     <div id="lb" style="display:none">
                         <div >用户信息：</div>

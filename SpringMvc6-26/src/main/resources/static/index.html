@@ -8,8 +8,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Welcome! - Start Bootstrap Theme</title>
-
+  <title>登录界面-login</title>
+  <link rel="shortcut icon" href="/图标书.ico"/>
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,16 +19,14 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
-  <link href="css/coming-soon.min.css" rel="stylesheet">
+  <link href="/css/coming-soon.min.css" rel="stylesheet">
 
 </head>
 
 <body>
 
   <div class="overlay"></div>
-  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-    <source src="mp4/bg.mp4" type="video/mp4">
-  </video>
+  
 
   <div class="masthead">
     <div class="masthead-bg"></div>
@@ -39,12 +37,27 @@
 
 
             <!-- 从这开始写!  --> 
-            
+            <h1>Login</h1>
+              <p>New here? Click
+                <a th:href="@{/user/register}">here</a> to register.
+              </p>
+    
+
+            <form method="POST" th:action="@{/user/login}" id="loginForm">
+              <!-- end::thAction[] -->
+              <label for="username">Username: </label>
+              <input type="text" name="username" id="username"  /><br/>
+
+      
+              <label for="password">Password: </label>
+              <input type="password" name="password" id="password" /><br/>
+              <span th:text="${loginError}==null?'View':${loginError}">NAME</span><br/>
+              <input type="submit" value="Login"/>
+            </form>
 
 
+            <!--       !  --> 
 
-
-            
           </div>
         </div>
       </div>
@@ -59,7 +72,12 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/coming-soon.min.js"></script>
-
+  
 </body>
+
+<!-- 在这里添加脚本!!-->
+
+
+
 
 </html>
