@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.UserController;
+import com.example.demo.dao.IUserDao;
 import com.example.demo.dao.UserDaoIml;
 import com.example.demo.domain.ListContent;
 import com.example.demo.domain.Seen;
@@ -23,7 +25,7 @@ public class UserService {
 
 
     @Autowired
-    private UserDaoIml userDao;
+    private IUserDao userDao;
     @Autowired
     private RedisUtils redisUtils;
 
