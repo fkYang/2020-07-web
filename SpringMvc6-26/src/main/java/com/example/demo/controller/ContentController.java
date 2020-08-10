@@ -41,7 +41,7 @@ public class ContentController {
 
     int limitItem = 5;
 
-    @GetMapping("/content")
+    @GetMapping("/content")//content列表
     public String getDemo(@RequestParam Map<String, String> map, Model model , HttpServletRequest request){
         System.out.println("content:"+map.toString());
         //初始化页数
@@ -59,10 +59,7 @@ public class ContentController {
             model.addAttribute("error","未找到相关信息:"+collectionName);
             return "/nameError";
         }
-     //   model.addAttribute("contents", contents);
-     //   Object o =model.getAttribute("currentPage");
-//        int i = Integer.valueOf(map.get("currentPage"));
- //       System.out.println("Content size:" + contents.size() + "--- :" + i);
+
         PageUtil<ListContent> pageInfo = new PageUtil<>(Integer.valueOf(map.get("currentPage")), limitItem, contents);
        // PageUtil<Content> pageInfo = new PageUtil<>(Integer.valueOf((Integer) model.getAttribute("currentPage")), 1, contents);
         model.addAttribute("contents", pageInfo.getList());
@@ -71,7 +68,7 @@ public class ContentController {
     }
 
     @ResponseBody
-    @RequestMapping("/content/detail")
+    @RequestMapping("/content/detail")//文档内容
     public String getDetail(@RequestParam Map<String, String> map  , Model model ,  HttpServletRequest request){
         //获取参数
         String collectionName  = map.get("collectionName");
@@ -84,14 +81,8 @@ public class ContentController {
             return "/nameError";
         }
         String mdTest = content.getContent();
-//        StringBuilder builder = new StringBuilder();
-//        builder.append("<html>\n" + "<body>");
-//        builder.append("<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">");
-//        String text = mdTest;
-//        builder.append(text);
-//        builder.append("</pre></body>\n" + "</html>");
-//        String html2 = builder.toString();
-        //转化为md文档
+
+        //转化md文档
         Document document = MarkDownUtils.PARSER.parse(mdTest);
         String html = MarkDownUtils.RENDERER.render(document);
         model.addAttribute("content",html);
@@ -104,7 +95,7 @@ public class ContentController {
     }
 
 
-    @RequestMapping("/content/name")
+    @RequestMapping("/content/name")//按照名字查找的结果集
     public String getNameList(@RequestParam Map<String, String> map  , Model model ,  HttpServletRequest request){
         //获取参数
         String collectionName  = map.get("collectionName");
@@ -128,7 +119,7 @@ public class ContentController {
     }
 
 
-    @RequestMapping("/content/tags")
+    @RequestMapping("/content/tags")//tag查找集合
     public String getTag(@RequestParam Map<String, String> map  , Model model,HttpServletRequest request){
 
         //初始化页数
