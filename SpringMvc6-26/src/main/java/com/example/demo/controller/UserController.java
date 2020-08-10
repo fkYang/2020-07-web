@@ -50,19 +50,13 @@ public class UserController {
         User user1 = userService.findByUsername(user.getUsername());
         if(user1 ==null || !bCryptPasswordEncoder.matches(user.getPassword(),user1.getPassword())){
             model.addAttribute("loginError", "登陆失败，用户不存在或者密码不正确");
-       // etAttribute("errors.login", "登陆失败，用户不存在或者密码不正确");
             return "/login";
         }
-        //      User user1 =(User) model.getAttribute("user");
-   //     System.out.println("first:  "+user1);
-        // public  String login(@Valid User user){
+
 
         HttpSession session = request.getSession(true);
         session.setAttribute("user", user1);
 
-
-
-     //   System.out.println(user1.toString());
         return "redirect:/home";
     }
 
@@ -76,11 +70,9 @@ public class UserController {
         //密码加密
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-//        System.out.println(request.toString());
-//        Map<String, String[]> parameterMap = request.getParameterMap();
+
         boolean result = userService.saveUser(user);
         //判断是否存在用户
-  //      System.out.println(user.toString());
         if(result){//sava成功，用户注册成功
             System.out.println(user.getUsername()+":"+user.toString());
             return "/login";
@@ -115,8 +107,6 @@ public class UserController {
                 break;
             }
         }
-        //      List<String> classType = new ArrayList<>();
-
         return "/userList";
     }
 }

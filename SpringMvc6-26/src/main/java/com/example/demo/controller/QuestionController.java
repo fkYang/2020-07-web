@@ -34,14 +34,8 @@ public class QuestionController {
         if (map.get("currentPage") == null|| map.get("currentPage").isEmpty()) {
             map.put("currentPage", "1");
         }
-//        String collectionName = map.get("collectionName");
-//        HttpSession session = request.getSession();
-//        session.setAttribute("collectionName", collectionName);
-//        //       System.out.println(collectionName);
-//        model.addAttribute("collectionName", collectionName);
-//        System.out.println(collectionName);
+
         List<Question> questions = questionService.getAll();
-        System.out.println(questions+"--------que");
 
         PageUtil<Question> pageInfo = new PageUtil<>(Integer.valueOf(map.get("currentPage")), limitItem, questions);
         // PageUtil<Content> pageInfo = new PageUtil<>(Integer.valueOf((Integer) model.getAttribute("currentPage")), 1, contents);

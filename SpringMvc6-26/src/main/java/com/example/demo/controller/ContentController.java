@@ -51,9 +51,7 @@ public class ContentController {
         String collectionName = map.get("collectionName");
         HttpSession session = request.getSession();
         session.setAttribute("collectionName", collectionName);
-        //       System.out.println(collectionName);
         model.addAttribute("collectionName", collectionName);
-//        System.out.println(collectionName);
         List<ListContent> contents = contentService.findAllContent(collectionName);
         if(contents == null || contents.size() == 0){
             model.addAttribute("error","未找到相关信息:"+collectionName);
@@ -74,7 +72,7 @@ public class ContentController {
         String collectionName  = map.get("collectionName");
         String id  = map.get("id");
 
-        System.out.println(collectionName);
+      //  System.out.println(collectionName);
         Content content = contentService.findById(collectionName, id);
         if(content == null){
             model.addAttribute("error","未找到相关信息:"+id);
@@ -99,7 +97,6 @@ public class ContentController {
     public String getNameList(@RequestParam Map<String, String> map  , Model model ,  HttpServletRequest request){
         //获取参数
         String collectionName  = map.get("collectionName");
-        System.out.println(collectionName);
 
         List<ListContent> contents;
         if(map.containsKey("keyWord")){

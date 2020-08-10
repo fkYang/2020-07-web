@@ -1,16 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.dao.ContentDaoIml;
-import com.example.demo.dao.UserDaoIml;
 import com.example.demo.domain.Content;
 import com.example.demo.domain.ListContent;
 import com.example.demo.domain.User;
 import com.example.demo.service.ContentService;
-import com.example.demo.utils.MongoDBConnection;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
