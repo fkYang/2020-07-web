@@ -145,15 +145,9 @@ public class UserDaoIml implements IUserDao {
                 mongo = new MongoTemplate(mongoDatabaseFactory);
                 Query query = Query.query(Criteria.where("_id").is(user.get_id()));
                 Update update = new Update();
-            //    update.unset("seen");
                 update.set("seen",user.getSeen());
-              //  update.addToSet("seen",user.getSeen());
-                //   update.set("seen.$.contents", seen.getContents());
                 UpdateResult users = mongo.updateFirst(query, update, "users");
                 System.out.println(users+"---------------------------");
-//                // Criteria.where("2").
-//                System.out.println("search--------------"+query.toString());
-//                User user = mongo.findOne(query, User.class);
                 return null;
             }
         });

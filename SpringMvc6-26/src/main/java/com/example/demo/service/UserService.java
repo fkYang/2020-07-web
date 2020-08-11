@@ -90,9 +90,7 @@ public class UserService {
                 break;
             }
         }
-        if(!find){
-
-
+        if(!find){//之前从未看过此类文档，初始化此类文档
             user.setSeen(seen);
 
             Seen temp = new Seen();
@@ -100,11 +98,10 @@ public class UserService {
             temp.setContents(new HashSet<>());
             temp.getContents().add(content);
 
-            seen.add(temp);
+            seen.add(temp);//将此类文档加入
         }
 
-        userDao.updateUserSeen(user);
-        redisUtils.hmSet(cacheName, user.getUsername(), user);
-
+        userDao.updateUserSeen(user);//更新数据库
+        redisUtils.hmSet(cacheName, user.getUsername(), user);//更新缓存
     }
 }

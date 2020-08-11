@@ -52,7 +52,6 @@ public class RedisUtils {
 
     public void setContetnExpireTime(String key){
         redisTemplate.expire(key, contentTimeNums, contentTimeUnit);
-
     }
 
     /**
