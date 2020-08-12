@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 //@ImportResource(locations = {"classpath:spring-MVC.xml"})
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "com.example.demo.dao")
-public class SpringMvc626Application {
+public class InterviewWeb {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringMvc626Application.class, args);
+        SpringApplication.run(InterviewWeb.class, args);
     }
 
 }

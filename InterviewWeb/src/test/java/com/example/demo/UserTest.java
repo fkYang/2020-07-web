@@ -29,7 +29,7 @@ import java.util.List;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = SpringMvc626Application.class)
+@ContextConfiguration(classes = InterviewWeb.class)
 public class UserTest {
     @Autowired
     IUserDao userDao;
